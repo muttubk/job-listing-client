@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from './RegisterForm.module.css'
 
 import Button from '../../components/button/Button'
+import axios from 'axios'
 
 function RegisterForm() {
     const initialFormData = {
@@ -14,6 +15,7 @@ function RegisterForm() {
     const [formData, setFormData] = useState(initialFormData)
     const [termsAgreed, setTermsAgreed] = useState(false)
     const [error, setError] = useState(false)
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -23,11 +25,21 @@ function RegisterForm() {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const validData = Object.keys(formData).every(data => formData[data].length !== 0)
         if (validData && termsAgreed) {
-            console.log(formData)
+            // console.log(formData)
+            try {
+                const response = await axios.post("http://localhost:4000/user/register", formData)
+                const data = response.data
+                // console.log(data)
+                localStorage.setItem('jwtoken', data.jwtoken)
+                localStorage.setItem('recruiterName', data.recruiterName)
+                navigate('/main')
+            } catch (error) {
+                console.log(error)
+            }
         }
         else {
             console.log('All fields are required')

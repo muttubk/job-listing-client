@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import styles from './LoginForm.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from '../../components/button/Button'
+import axios from 'axios'
 
 function LoginForm() {
 
@@ -10,6 +11,7 @@ function LoginForm() {
         password: ''
     })
     const [error, setError] = useState(false)
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -18,11 +20,21 @@ function LoginForm() {
             [name]: value
         })
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const validData = Object.keys(formData).every(data => formData[data].length !== 0)
         if (validData) {
-            console.log(formData)
+            // console.log(formData)
+            try {
+                const response = await axios.post("http://localhost:4000/user/login", formData)
+                const data = response.data
+                // console.log(data)
+                localStorage.setItem('jwtoken', data.jwtoken)
+                localStorage.setItem('recruiterName', data.recruiterName)
+                navigate('/main')
+            } catch (error) {
+                console.log(error)
+            }
         }
         else {
             console.log('all fields are required')
