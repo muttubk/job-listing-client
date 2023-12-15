@@ -1,0 +1,110 @@
+*{
+    font-family: 'DM Sans', sans-serif;
+}
+
+.Container {
+    width: 60%;
+}
+
+.heading1{
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 140%;
+}
+
+.heading2{
+    font-size: 1rem;
+    font-weight: 500;
+    color: #525252;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.input {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+    background-color: #fff;
+    border: 1.5px solid #C2C2C2;
+    border-radius: 5px;
+    outline: none;
+}
+.input::placeholder{
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #525252;
+}
+
+.termsLabel{
+    font-size: 0.8rem;
+    color: #525252;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    display: flex;
+    gap: 10px;
+    position: relative;
+}
+
+/* checkmark */
+.terms{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+}
+.checkmark{
+    width: 15px;
+    height: 15px;
+    padding: 2px;
+    border: 1.5px solid #C2C2C2;
+}
+.terms:checked ~ .checkmark{
+    content: url('../../assets/images/checked.svg');
+    background-color: #858585;
+    border: none;
+}
+.terms:hover ~ .checkmark{
+    border-color: #000;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 0.7rem;
+    font-weight: 500;
+    margin-top: -22px;
+    margin-bottom: -10px;
+}
+
+/* Create account button */
+/* .createBtn {
+    background-color: #ED5353;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    width: fit-content;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+} */
+
+.signIn {
+    color: #525252;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.signInLink {
+    color: #000000;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.signInLink:hover {
+    color: #797979;
+}

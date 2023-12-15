@@ -1,0 +1,23 @@
+.Container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.imageTopText {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    padding: 0 20px;
+    position: absolute;
+    top: 30px;
+}
