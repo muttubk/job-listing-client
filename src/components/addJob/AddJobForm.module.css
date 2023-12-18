@@ -1,0 +1,102 @@
+.Container {
+    width: 80%;
+    padding: 20px 0;
+}
+
+.heading{
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 140%;
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 20px;
+}
+
+.form *{
+    font-family: 'DM Sans', sans-serif;
+}
+
+.form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form>div{
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.form label{
+    width: 25%;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.form input{
+    flex-grow: 1;
+    border: 1.8px solid #C2C2C2;
+    border-radius: 5px;
+    padding: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+.form input::placeholder{
+    color: #ADADAD;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.form select{
+    width: 100px;
+    border: 1.8px solid #C2C2C2;
+    border-radius: 5px;
+    padding: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.form textarea{
+    height: 100px;
+    flex-grow: 1;
+    border: 1.8px solid #C2C2C2;
+    border-radius: 5px;
+    resize: none;
+    padding: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+.form textarea::placeholder{
+    color: #ADADAD;
+    font-weight: 500;
+}
+
+.alignTop{
+    align-self: flex-start;
+}
+
+.buttonsContainer{
+    display: flex;
+    justify-content: end;
+}
+.cancelBtn, .submitBtn{
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 5px;
+    width: 145px;
+    height: 40px;
+    cursor: pointer;
+}
+.cancelBtn{
+    background-color: transparent;
+    color: #C2C2C2;
+    border: 1px solid #CECECE;
+}
+.submitBtn{
+    background-color: #ED5353;
+    color: #fff;
+    border: none;
+}
+
