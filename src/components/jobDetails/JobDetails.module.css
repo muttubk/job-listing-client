@@ -1,0 +1,112 @@
+.summaryText{
+    width: 100%;
+    background-color: #fff;
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    line-height: 140%;
+    z-index: 1;
+    box-shadow: 0px 4px 23px 2px rgba(0, 0, 0, 0.10);
+}
+
+
+.detailsContainer{
+    background: #FFF;
+    padding: 2rem;
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    box-shadow: 0px 2px 35px 1px rgba(0, 0, 0, 0.10);
+}
+
+.row1{
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #999999;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.companyLogo{
+    width: 25px;
+    height: 25px;
+}
+
+.row2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.jobTitle{
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 140%;
+}
+.editJobBtn{
+    background-color: #ED5353;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 140%;
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.jobLocation{
+    color: #ED5353;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+.salaryText{
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #999999;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.moneyIcon{
+    width: 20px;
+}
+.salary{
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #595959;
+    margin-top: 5px;
+}
+
+.title{
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.content{
+    font-size: 1rem;
+    font-weight: 400;
+    color: #595959;
+    line-height: 150%;
+}
+
+.skillsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.skill{
+    font-size: 1rem;
+    font-weight: 400;
+    color: #595959;
+    background-color: #FFEEEE;
+    padding: 0.2rem 1rem;
+    border: none;
+    border-radius: 100px;
+}

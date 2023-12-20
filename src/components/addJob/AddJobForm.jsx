@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './AddJobForm.module.css'
 import axios from 'axios'
-import { ToastContainer, toast } from 'react-toastify'
-import "react-toastify/dist/ReactToastify.css"
+import { useNavigate } from 'react-router-dom'
+import { ToastBox, Toast } from '../../utils/Toast'
 
-function AddJobForm() {
+function AddJobForm(props) {
+    const navigate = useNavigate()
+
     const initialFormData = {
         companyName: '',
         logoURL: '',
@@ -19,6 +21,24 @@ function AddJobForm() {
         additionalInfo: '',
     }
     const [formData, setFormData] = useState(initialFormData)
+
+    useEffect(() => {
+        if (props.job_id) {
+            (async () => {
+                try {
+                    const res = await axios.get(`http://localhost:4000/job/details/${props.job_id}`)
+                    let skillsString = res.data.jobDetails.skillsRequired.join(',')
+                    setFormData({
+                        ...res.data.jobDetails,
+                        skillsRequired: skillsString
+                    })
+                } catch (error) {
+                    console.log(error)
+                }
+            })()
+        }
+    }, [props])
+
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData({
@@ -29,7 +49,7 @@ function AddJobForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const dataPresent = Object.keys(formData).every(data => formData[data])
+        const dataPresent = Object.keys(formData).every(data => formData[data].trim().length !== 0)
         if (dataPresent) {
             try {
                 const jwtoken = localStorage.getItem('jwtoken')
@@ -38,41 +58,41 @@ function AddJobForm() {
                     'jwtoken': jwtoken
                 }
                 const res = await axios.post('http://localhost:4000/job/create-job', formData, { headers: headers })
-                notify('success', res.data.message)
-                console.log(res)
+                Toast('success', res.data.message)
             } catch (error) {
                 console.log(error)
-                notify('failed', "Something went wrong")
+                Toast('failed', "Something went wrong")
             }
         }
         else {
-            console.log('All fields are required.')
+            Toast('failed', "All fields are required.")
         }
     }
 
-    const notify = (status, message) => {
-        if (status === 'success') {
-            toast.success(message, {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
+    const handleCancel = () => {
+        navigate(-1)
+    }
+
+    const handleEdit = async (e) => {
+        e.preventDefault();
+        const dataPresent = Object.keys(initialFormData).every(item => formData[item].trim().length !== 0)
+        if (dataPresent) {
+            try {
+                const jwtoken = localStorage.getItem('jwtoken')
+                const headers = {
+                    'Content-Type': 'application/json',
+                    'jwtoken': jwtoken
+                }
+                const res = await axios.patch(`http://localhost:4000/job/edit-job/${props.job_id}`, formData, {
+                    headers: headers
+                })
+                Toast('success', res.data.message)
+            } catch (error) {
+                console.log(error)
+                Toast("failed", "Something went wrong")
+            }
         } else {
-            toast.error(message, {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
+            Toast('failed', "All fields are required.")
         }
     }
 
@@ -80,7 +100,9 @@ function AddJobForm() {
         <>
             <div className={styles.Container}>
                 <h1 className={styles.heading}>Add job description</h1>
-                <form className={styles.form} onSubmit={handleSubmit}>
+                <form className={styles.form} onSubmit={
+                    props.job_id ? handleEdit : handleSubmit
+                }>
                     <div>
                         <label htmlFor="companyName">Company Name </label>
                         <input type="text"
@@ -196,23 +218,18 @@ function AddJobForm() {
                         />
                     </div>
                     <div className={styles.buttonsContainer}>
-                        <button type="button" onClick={notify} className={styles.cancelBtn}>Cancel</button>
-                        <button type="submit" className={styles.submitBtn}>+ Add Job</button>
+                        <button type="button" onClick={handleCancel} className={styles.cancelBtn}>Cancel</button>
+                        <button type="submit" className={styles.submitBtn}>
+                            {
+                                props.job_id
+                                    ? "Update Job"
+                                    : "+ Add Job"
+                            }
+                        </button>
                     </div>
                 </form>
             </div>
-            <ToastContainer
-                position="top-center"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-            />
+            <ToastBox />
         </>
     )
 }

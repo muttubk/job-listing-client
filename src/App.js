@@ -6,6 +6,7 @@ import LoginForm from './components/login/LoginForm'
 import RegisterForm from './components/register/RegisterForm'
 import MainPage from './pages/main/MainPage'
 import AddJobPage from './pages/addJob/AddJobPage'
+import ViewDetailsPage from './pages/viewDetails/ViewDetailsPage';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
           </Route>
           <Route path='/main' element={<MainPage />} />
           <Route path='/add-job' element={<AddJobPage />} />
+          <Route path='/edit-job/:job_id' element={<AddJobPage />} />
+          <Route path='/view-details/:job_id' element={<ViewDetailsPage />} />
         </Routes>
       </BrowserRouter>
     </div>
