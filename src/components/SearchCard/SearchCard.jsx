@@ -10,19 +10,25 @@ import axios from 'axios'
 function SearchCard(props) {
     const navigate = useNavigate()
 
+    const [skills, setSkills] = useState([])
     const [jobPosition, setJobPosition] = useState('')
     const [skillsRequired, setSkillsRequired] = useState([])
     const [jobPosts, setJobPosts] = useState([])
 
     useEffect(() => {
-        (async () => {
-            const query1 = `jobPosition=${jobPosition.trim()}`
-            let skillsString = skillsRequired?.join(',')
-            const query2 = `skillsRequired=${skillsString}`
-            const query = `${query1}&${query2}`
-            const res = await axios.get(`http://localhost:4000/job/display-jobs?${query}`)
-            setJobPosts(res.data.jobPosts)
-        })()
+        axios.get("http://localhost:4000/job/skills")
+            .then((res) => setSkills(res.data.skills))
+            .catch((error) => console.log(error))
+    }, [])
+
+    useEffect(() => {
+        const query1 = `jobPosition=${jobPosition.trim()}`
+        let skillsString = skillsRequired?.join(',')
+        const query2 = `skillsRequired=${skillsString}`
+        const query = `${query1}&${query2}`
+        axios.get(`http://localhost:4000/job/display-jobs?${query}`)
+            .then((res) => setJobPosts(res.data.jobPosts))
+            .catch((error) => console.log(error))
     }, [jobPosition, skillsRequired])
 
     const handleSearch = (e) => {
@@ -73,14 +79,11 @@ function SearchCard(props) {
                                 onChange={handleSelect}
                             >
                                 <option value="" disabled>Skills</option>
-                                <option value="C">C</option>
-                                <option value="Java">Java</option>
-                                <option value="Python">Python</option>
-                                <option value="SQL">SQL</option>
-                                <option value="MySQL">MySQL</option>
-                                <option value="HTML">HTML</option>
-                                <option value="CSS">CSS</option>
-                                <option value="JavaScript">JavaScript</option>
+                                {
+                                    skills.map((skill) => (
+                                        <option key={skill} value={skill}>{skill}</option>
+                                    ))
+                                }
                             </select>
                         </label>
                         {
@@ -110,7 +113,6 @@ function SearchCard(props) {
                     <JobCard key={jobPost._id} {...jobPost} isLoggedIn={props.isLoggedIn} />
                 )) : "No matching jobs found!"
             }
-            {/* <JobCard /> */}
         </>
     )
 }

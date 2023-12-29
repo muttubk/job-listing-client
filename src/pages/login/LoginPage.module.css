@@ -1,0 +1,18 @@
+.Container {
+    display: flex;
+    width: 100%;
+}
+
+/* left side */
+.leftSide {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* right side */
+.rightSide {
+    width: 40%;
+    height: 100%;
+}

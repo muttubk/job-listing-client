@@ -1,15 +1,15 @@
 import React from 'react'
-import styles from './RegisterPage.module.css'
+import styles from './LoginPage.module.css'
 
-import RegisterForm from '../../components/register/RegisterForm'
+import LoginForm from '../../components/login/LoginForm'
 import CoverImage from '../../components/coverImage/CoverImage'
 import loginCover from '../../assets/images/loginCover.png'
 
-function RegisterPage() {
+function LoginPage() {
     return (
         <div className={styles.Container}>
             <div className={styles.leftSide}>
-                <RegisterForm />
+                <LoginForm />
             </div>
             <div className={styles.rightSide}>
                 <CoverImage image={loginCover} text={"Your Personal Job Finder"} />
@@ -18,4 +18,4 @@ function RegisterPage() {
     )
 }
 
-export default RegisterPage
+export default LoginPage

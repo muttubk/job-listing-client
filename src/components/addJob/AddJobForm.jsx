@@ -61,7 +61,7 @@ function AddJobForm(props) {
                 Toast('success', res.data.message)
             } catch (error) {
                 console.log(error)
-                Toast('failed', "Something went wrong")
+                Toast('failed', error.response.data.message)
             }
         }
         else {

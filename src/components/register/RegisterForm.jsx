@@ -5,6 +5,8 @@ import styles from './RegisterForm.module.css'
 import Button from '../../components/button/Button'
 import axios from 'axios'
 
+import { Toast } from '../../utils/Toast'
+
 function RegisterForm() {
     const initialFormData = {
         fullName: '',
@@ -36,9 +38,12 @@ function RegisterForm() {
                 // console.log(data)
                 localStorage.setItem('jwtoken', data.jwtoken)
                 localStorage.setItem('recruiterName', data.recruiterName)
-                navigate('/main')
+                setError(false)
+                navigate('/')
+                Toast("success", "Registered successfully")
             } catch (error) {
                 console.log(error)
+                setError(error.response.data.message)
             }
         }
         else {
@@ -120,10 +125,13 @@ function RegisterForm() {
                     error && !termsAgreed &&
                     <small className={styles.errorMessage}>Field is required</small>
                 }
-                {/* <input className={styles.createBtn} type="button" value="Create Account" /> */}
+                {
+                    error &&
+                    <small className={styles.errorMessage} style={{ marginTop: "0px" }}>{error}</small>
+                }
                 <Button value={"Create Account"} styles={{ width: "200px" }} />
             </form>
-            <p className={styles.signIn}>Already have an account? <Link to="/" className={styles.signInLink}>Sign in</Link></p>
+            <p className={styles.signIn}>Already have an account? <Link to="/login" className={styles.signInLink}>Sign in</Link></p>
         </div>
     )
 }

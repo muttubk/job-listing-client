@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import Button from '../../components/button/Button'
 import axios from 'axios'
 
+import { Toast } from '../../utils/Toast'
+
 function LoginForm() {
 
     const [formData, setFormData] = useState({
@@ -31,13 +33,15 @@ function LoginForm() {
                 // console.log(data)
                 localStorage.setItem('jwtoken', data.jwtoken)
                 localStorage.setItem('recruiterName', data.recruiterName)
-                navigate('/main')
+                navigate('/')
+                Toast('success', "Logged in successfully")
             } catch (error) {
                 console.log(error)
+                setError(error.response.data.message)
             }
         }
         else {
-            console.log('all fields are required')
+            // console.log('all fields are required')
             setError(true)
         }
     }
@@ -72,6 +76,10 @@ function LoginForm() {
                 {
                     error && !formData.password &&
                     <small className={styles.errorMessage}>Field is required</small>
+                }
+                {
+                    error && formData.email && formData.password &&
+                    <small className={styles.errorMessage} style={{ marginTop: "0px" }}>{error}</small>
                 }
                 <Button value={"Sign in"} styles={{ width: "200px", marginTop: "15px" }} />
             </form>

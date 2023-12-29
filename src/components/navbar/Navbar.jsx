@@ -4,14 +4,17 @@ import styles from './Navbar.module.css'
 import profileLogo from '../../assets/images/profileLogo.png'
 
 import { useNavigate } from 'react-router-dom'
+import { Toast } from '../../utils/Toast'
 
 function Navbar(props) {
     const navigate = useNavigate()
+    const recruiterName = localStorage.getItem('recruiterName')
 
     const handleLogout = () => {
         localStorage.removeItem('jwtoken')
         localStorage.removeItem('recruiterName')
         props.setIsLoggedIn('')
+        Toast('success', "Logged out")
     }
     return (
         <div className={styles.NavbarContainer}>
@@ -27,18 +30,18 @@ function Navbar(props) {
                 </svg>
             </div>
             <div className={styles.navbar}>
-                <p className={styles.logo}>Jobfinder</p>
+                <p className={styles.logo} onClick={() => navigate('/')}>Jobfinder</p>
                 <div className={styles.navRight}>
                     {
                         props.loggedIn ?
                             <>
                                 <button onClick={handleLogout} className={styles.logoutBtn}>Logout</button>
-                                <p className={styles.greeting}>Hello! Recruiter</p>
+                                <p className={styles.greeting}>Hello! {recruiterName}</p>
                                 <img className={styles.profileLogo} src={profileLogo} alt="profile" />
                             </>
                             :
                             <>
-                                <button onClick={() => navigate('/')} className={styles.loginBtn}>Login</button>
+                                <button onClick={() => navigate('/login')} className={styles.loginBtn}>Login</button>
                                 <button onClick={() => navigate('/register')} className={styles.registerBtn}>Register</button>
                             </>
                     }
