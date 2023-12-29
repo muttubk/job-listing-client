@@ -1,8 +1,20 @@
 import React from 'react'
 
 function NotFound() {
+    const styles = {
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        fontSize: "2rem",
+        fontWeight: "700",
+    }
     return (
-        <div>Page Not Found</div>
+        <div style={styles}>
+            <h1>404</h1>
+            <p>Page Not Found</p>
+        </div>
     )
 }
 
