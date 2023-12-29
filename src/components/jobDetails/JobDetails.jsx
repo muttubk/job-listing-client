@@ -11,7 +11,7 @@ function JobDetails(props) {
 
     useEffect(() => {
         (async () => {
-            const res = await axios.get(`http://localhost:4000/job/details/${props.job_id}`)
+            const res = await axios.get(`https://job-listing-vjny.onrender.com/job/details/${props.job_id}`)
             setJobDetails(res.data.jobDetails)
         })()
     }, [props])

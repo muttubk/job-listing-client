@@ -16,7 +16,7 @@ function SearchCard(props) {
     const [jobPosts, setJobPosts] = useState([])
 
     useEffect(() => {
-        axios.get("http://localhost:4000/job/skills")
+        axios.get("https://job-listing-vjny.onrender.com/job/skills")
             .then((res) => setSkills(res.data.skills))
             .catch((error) => console.log(error))
     }, [])
@@ -26,7 +26,7 @@ function SearchCard(props) {
         let skillsString = skillsRequired?.join(',')
         const query2 = `skillsRequired=${skillsString}`
         const query = `${query1}&${query2}`
-        axios.get(`http://localhost:4000/job/display-jobs?${query}`)
+        axios.get(`https://job-listing-vjny.onrender.com/job/display-jobs?${query}`)
             .then((res) => setJobPosts(res.data.jobPosts))
             .catch((error) => console.log(error))
     }, [jobPosition, skillsRequired])

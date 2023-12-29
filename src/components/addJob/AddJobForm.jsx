@@ -26,7 +26,7 @@ function AddJobForm(props) {
         if (props.job_id) {
             (async () => {
                 try {
-                    const res = await axios.get(`http://localhost:4000/job/details/${props.job_id}`)
+                    const res = await axios.get(`https://job-listing-vjny.onrender.com/job/details/${props.job_id}`)
                     let skillsString = res.data.jobDetails.skillsRequired.join(',')
                     setFormData({
                         ...res.data.jobDetails,
@@ -57,7 +57,7 @@ function AddJobForm(props) {
                     'Content-Type': 'application/json',
                     'jwtoken': jwtoken
                 }
-                const res = await axios.post('http://localhost:4000/job/create-job', formData, { headers: headers })
+                const res = await axios.post('https://job-listing-vjny.onrender.com/job/create-job', formData, { headers: headers })
                 Toast('success', res.data.message)
             } catch (error) {
                 console.log(error)
@@ -83,7 +83,7 @@ function AddJobForm(props) {
                     'Content-Type': 'application/json',
                     'jwtoken': jwtoken
                 }
-                const res = await axios.patch(`http://localhost:4000/job/edit-job/${props.job_id}`, formData, {
+                const res = await axios.patch(`https://job-listing-vjny.onrender.com/job/edit-job/${props.job_id}`, formData, {
                     headers: headers
                 })
                 Toast('success', res.data.message)

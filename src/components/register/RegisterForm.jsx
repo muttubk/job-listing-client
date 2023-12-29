@@ -33,7 +33,7 @@ function RegisterForm() {
         if (validData && termsAgreed) {
             // console.log(formData)
             try {
-                const response = await axios.post("http://localhost:4000/user/register", formData)
+                const response = await axios.post("https://job-listing-vjny.onrender.com/user/register", formData)
                 const data = response.data
                 // console.log(data)
                 localStorage.setItem('jwtoken', data.jwtoken)
