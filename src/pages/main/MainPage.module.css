@@ -1,0 +1,15 @@
+.Container{
+    width: 100%;
+    min-height: 100vh;
+    background-color: #FFFFFF;
+}
+
+.Container2{
+    width: 75%;
+    margin: auto;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}

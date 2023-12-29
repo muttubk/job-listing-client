@@ -1,0 +1,25 @@
+.Container{
+    background-color: #FFEEEE;
+    display: flex;
+    align-items: center;
+    height: 35px;
+}
+
+.text{
+    padding: 0 10px;
+    font-size: 0.8rem;
+    color: #000;
+    font-weight: 500;
+}
+
+.cancelMarkContainer{
+    background-color: #FF6B6B;
+    height: 100%;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cancelMark{
+    width: 15px;
+}
